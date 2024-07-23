@@ -6,24 +6,121 @@
     <title>day-10 : event handling</title>
   </head>
   <style>
-    #btn{
+    #btn {
       border: 2px solid black;
       margin: 5px;
       padding: 10px;
     }
+    div {
+      height: 500px;
+      width: 500px;
+      border: 2px solid black;
+      text-align: center;
+      background-color: black;
+    }
   </style>
   <body>
     <h1>Event handling</h1>
+    <h3>
+      Task-1 : Add click event listener to change the paragraph content by
+      clicking the button.
+    </h3>
     <p id="para">intial para content</p>
+    <br />
+    <button onclick="change()">Change para content</button>
+    <br /><br />
+    <h3>
+      Task-2 : Add double click event listener that toggles its visibility...
+    </h3>
     <img
       id="img"
       src="https://images.pexels.com/photos/10147934/pexels-photo-10147934.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
       alt="wallpaper"
       width="500"
     />
+    <br />
     <p id="btn">click to toggle the image</p>
+
+    <h3>
+      Task-3&4: div that changes the background color by mouse over and mouseout
+    </h3>
+    <div id="container">Container</div>
+    <h3>Task-5: keydown event that log the which key is pressed</h3>
+    <input id="input1" type="text" placeholder="Enter something" />
+    <h3>Task-5: keyup event that log the value in input</h3>
+    <input id="input2" type="text" placeholder="Enter something" />
+    <h3>Task-6 & 7: form handling</h3>
+    <form id="myForm" action="">
+      <input type="text" placeholder="enter something" /><br /><br />
+      <select name="selection" id="selection">
+        <option value="option1">option1</option>
+        <option value="option2">option2</option>
+        <option value="option3">option3</option>
+        <option value="option4">option4</option></select
+      ><br />
+      <p id="inputText">value shows here</p>
+      <br />
+      <button type="submit">Submit form</button>
+    </form>
+    <h3>Task-9 & 10: list</h3>
+    <ul id="myList">
+      <li>JavaScript</li>
+      <li>Python</li>
+      <li>Java</li>
+      <li>Solidity</li>
+    </ul>
+    <input  type="text" id="newLi" placeholder="append lang">
+    <button onclick="random()">append</button>
   </body>
   <script>
+    const list = document.getElementById("myList");
+
+    function random() {
+      const lang = document.getElementById("newLi").value;
+      const li = document.createElement('li');
+      li.textContent = lang;
+      list.appendChild(li)
+    }
+
+    list.addEventListener("click", (event) => {
+        console.log("Clicked on:", event.target.textContent);
+    });
+
+
+    document
+      .getElementById("selection")
+      .addEventListener("change", function () {
+        document.getElementById("inputText").textContent = this.value;
+      });
+
+    document.getElementById("myForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      console.log(e.target.querySelector("input").value);
+      console.log(e.target.querySelector("select").value);
+    });
+    let input1 = document.querySelector("#input1");
+    input1.addEventListener("keydown", function (e) {
+      console.log("key pressed : " + e.key);
+    });
+    let input2 = document.querySelector("#input2");
+    input2.addEventListener("keyup", function (e) {
+      console.log("keyup : " + e.target.value);
+    });
+
+    let intialColor =
+      document.getElementById("container").style.backgroundColor;
+    document
+      .getElementById("container")
+      .addEventListener("mouseover", function () {
+        document.getElementById("container").style.backgroundColor = "purple";
+      });
+    document
+      .getElementById("container")
+      .addEventListener("mouseout", function () {
+        document.getElementById("container").style.backgroundColor =
+          intialColor;
+      });
+
     function toggle() {
       let x = document.getElementById("img");
       if (x.style.display === "none") {
@@ -33,8 +130,8 @@
       }
     }
 
-    const btn = document.getElementById('btn');
-    btn.addEventListener('dblclick',toggle);
+    const btn = document.getElementById("btn");
+    btn.addEventListener("dblclick", toggle);
 
     function change() {
       const para = document.getElementById("para");
