@@ -124,3 +124,4 @@ console.log("after removal");
 
 ll.removeFirst();
 ll.print();
+
